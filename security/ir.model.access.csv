@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.fleet.vehicle.tours,access_fleet_vehicle_tours,fleet_spa.model_fleet_vehicle_tours,fleet.fleet_group_manager,1,1,1,1
+access.fleet.vehicle.tours.orders,acces_fleet_vehicle_tours_orders,fleet_spa.model_fleet_vehicle_tours_orders,fleet.fleet_group_manager,1,1,1,1
+access.fleet.wilaya,acces_fleet_wilaya,fleet_spa.model_fleet_wilaya,fleet.fleet_group_manager,1,1,1,1
+access.fleet.commune,acces_fleet_commune,fleet_spa.model_fleet_commune,fleet.fleet_group_manager,1,1,1,1
+
+fleet.fleet_vehicle_state_access_right,fleet_vehicle_state_access_right,fleet.model_fleet_vehicle_state,fleet.fleet_group_manager,1,1,0,0
+fleet.fleet_vehicle_model_category_access_right,fleet_vehicle_model_brand_category_right,fleet.model_fleet_vehicle_model_category,fleet.fleet_group_manager,1,0,0,0
+

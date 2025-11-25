@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <record id="traveaux_de_chantier" model="fleet.vehicle.model.category">
+            <field name="name">Vehicules pour traveaux de chantier</field>
+        </record>
+        <record id="touristique" model="fleet.vehicle.model.category">
+            <field name="name">Vehicules touristique</field>
+        </record>
+        <record id="transport_commun" model="fleet.vehicle.model.category">
+            <field name="name">Vehicules de transport en commun (Bus)</field>
+        </record>
+        <record id="tracteurs_routiers" model="fleet.vehicle.model.category">
+            <field name="name">Tracteurs routiers</field>
+        </record>
+        <record id="tracteurs_agricoles" model="fleet.vehicle.model.category">
+            <field name="name">Tracteurs agricoles</field>
+        </record>
+        <record id="vehicules_speciaux" model="fleet.vehicle.model.category">
+            <field name="name">Vehicules speciaux(gros depanneurs avec grue)</field>
+        </record>
+        <record id="remorques" model="fleet.vehicle.model.category">
+            <field name="name">Remorques</field>
+        </record>
+        <record id="moto" model="fleet.vehicle.model.category">
+            <field name="name">Moto</field>
+        </record>
+        <record id="utilitaireplus3500" model="fleet.vehicle.model.category">
+            <field name="name">Vehicules utilitaires +3.500T</field>
+        </record>
+        <record id="utilitaireless3500" model="fleet.vehicle.model.category">
+            <field name="name">Vehicules utilitaires moin de 3.500T</field>
+        </record>
+    </data>
+</odoo>

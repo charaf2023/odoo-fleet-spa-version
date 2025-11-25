@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--        ######## FLEET_VEHICLE_MODEL_FORM-->
+        <record id="fleet_vehicle_model_view_form_inherit" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle.model.form</field>
+            <field name="model">fleet.vehicle.model</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='trailer_hook']" position="after">
+                    <field name="ptac"/>
+                    <field name="payload"/>
+                </xpath>
+                <xpath expr="//field[@name='vehicle_type']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='model_year']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='color']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+            </field>
+        </record>
+        <!--        ######## FLEET_VEHICLE_LOG_FORM-->
+        <record id="fleet_vehicle_log_contract_view_form_inherit" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle.log.contract.form</field>
+            <field name="model">fleet.vehicle.log.contract</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='service_ids']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='insurer_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='ins_ref']" position="after">
+                    <field name="assurance_company"/>
+                </xpath>
+            </field>
+        </record>
+        <!--        ######## FLEET_VEHICLE_LOG_TREE-->
+        <record id="fleet_vehicle_log_contract_view_tree_inherit" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle.log.contract.tree</field>
+            <field name="model">fleet.vehicle.log.contract</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='cost_frequency']" position="after">
+                    <field name="cost_subtype_id" string="Type of contract"/>
+                </xpath>
+            </field>
+        </record>
+        <!--                ######## FLEET_VEHICLE_TREE-->
+        <record id="fleet_vehicle_view_tree_inherit" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle.tree</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tag_ids']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!--                ######FLEET VEHICLE FORM -->
+        <record id="fleet_vehicle_view_form_inherit" model="ir.ui.view">
+            <field name="name">inherit.fleet.vehicle.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='license_plate']" position="after">
+                    <group>
+                        <field name="spa_vehicle_type"/>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="before">
+                    <field name="old_reg_card_nbr"/>
+                    <field name="yr_of_first_reg"/>
+                </xpath>
+                <xpath expr="//page[@name='page_tax_info']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='model_year']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='odometer_unit']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_date']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='acquisition_date']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='location']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//notebook/page[1]" position="before">
+                    <page string="Les contracts">
+                        <field name="contracts_ids"/>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='future_driver_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='plan_to_change_car']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='next_assignation_date']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='write_off_date']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='odometer']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='manager_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

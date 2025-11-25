@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+    <!--            ACTION MENU => FORM,TREE-->
+    <record id="action_fleet_vehicle_tours" model="ir.actions.act_window">
+        <field name="name">Les tournées</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fleet.vehicle.tours</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Tour!, the first step of a new good job!
+            </p>
+        </field>
+    </record>
+    <!--        MENU TOURS-->
+    <menuitem
+            id="menu_tours"
+            name="Tours"
+            action="action_fleet_vehicle_tours"
+            parent="fleet.menu_root"
+            sequence="-100"/>
+
+    <!-- #################   FORM VIEW   -->
+    <record id="view_fleet_vehicle_tours_form" model="ir.ui.view">
+        <field name="name">view.fleet.vehicle.tours.form</field>
+        <field name="model">fleet.vehicle.tours</field>
+        <field name="arch" type="xml">
+            <!--            to disable create delete or duplicate in form  => copy/delete/create/edit="0"-->
+            <form>
+                <!--  ####### STATUSBAR:        header of statusbar widget must be in the beginning of the view-->
+                <header>
+                    <button name="action_tours_confirmed" type="object" class="oe_highlight" string="Confirmer"
+                            confirm="Voulez-vous confirmer cet enregistrement?" invisible="state != 'not_confirmed'"/>
+                    <button name="action_tours_done" type="object" class="oe_highlight" string="Done"
+                            confirm="La tournée est-elle terminée ?"
+                            invisible="state!='confirmed'" data-hotkey="Z"/>?
+                    <button name="action_tours_cancel" type="object" class="oe_highlight" string="Annuler"
+                            confirm="Voulez-vous annuler cet enregistrement?"
+                            invisible="state != 'confirmed'"/>
+                    <button name="action_tours_not_confirmed" type="object" class="oe_highlight" string="Restaurer"
+                            confirm="Voulez-vous restaurer cet enregistrement?" invisible="state != 'cancelled'"/>
+                    <!--                    options="{'clickable':'1'}"-->
+                    <field name="state" widget="statusbar" nolabel="1"
+                           statusbar_visible="not_confirmed,confirmed,done,cancelled"/>
+                </header>
+                <sheet>
+                    <!--    ##### PRIORITY WIDGET in beginning of the sheet-->
+                    <div class="oe_title">
+                        <h2>
+                            <field name="priority" widget="priority"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="vehicle_id"/>
+                            <field name="selected_driver_id" widget="many2one_avatar_user"/>
+                        </group>
+                        <group>
+                            <field name="tour_date"/>
+                            <field name="tour_time"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="Les commandes">
+                            <field name="tours_contracts_ids">
+                                <tree multi_edit="1" editable="top">
+                                    <field name="order_number" optional="show"/>
+                                    <field name="client_id"/>
+                                    <field name="wilaya_id" options="{'no_create': True, 'no_quick_create': True}"/>
+                                    <field name="commune_id" options="{'no_create': True, 'no_quick_create': True}"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="order_number"/>
+                                        <field name="client_id"/>
+                                        <field name="wilaya_id"/>
+                                        <field name="commune_id"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page name="details" string="Details">
+                            <field name="details" placeholder="Enter any details here"
+                                   options="{'collaborative':true,'resizable':true}"/>
+                        </page>
+
+
+                    </notebook>
+                </sheet>
+                <!--    CHATTER     -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--   ############ TREE VIEW   -->
+    <record id="view_fleet_vehicle_tours_tree" model="ir.ui.view">
+        <field name="name">view.fleet.vehicle.tours.tree</field>
+        <field name="model">fleet.vehicle.tours</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state=='done'" decoration-warning="state=='not_confirmed'"
+                  decoration-info="state=='confirmed'" decoration-danger="state=='cancelled'" sample="1"
+            >
+                <header>
+                    <button name="action_change_state_mul_confirmed" type="object" class="oe_highlight" string="Confirmer"
+                            confirm="Voulez-vous confirmer tous les enregistrements sélectionnés ?"/>
+                    <button name="action_change_state_mul_done" type="object" class="oe_highlight" string="Done"
+                            confirm="Voulez-vous que tous les enregistrements sélectionnés soient à l'état « Done » ?"/>
+                    <button name="action_change_state_mul_cancel" type="object" class="oe_highlight" string="Annuler"
+                            confirm="Voulez-vous annuler tous les enregistrements sélectionnés ?"/>
+                    <button name="action_change_state_mul_restore" type="object" class="oe_highlight" string="Restaurer"
+                            confirm="Voulez-vous restaurer tous les enregistrements sélectionnés ?"/>
+                </header>
+                <field name="vehicle_id" optional="show"/>
+                <field name="selected_driver_id" optional="show"/>
+                <field name="tour_time" optional="show"/>
+                <field name="tour_date" optional="show"/>
+                <field name="activity_ids" optional="show" widget="list_activity"/>
+                <field name="client_values" optional="show"/>
+                <field name="destination_values" optional="show"/>
+
+                <field name="state" widget="badge"
+                       decoration-success="state=='done'"
+                       decoration-warning="state=='not_confirmed'"
+                       decoration-info="state=='confirmed'"
+                       decoration-danger="state=='cancelled'"
+                />
+                <!--success+warning info muted danger-->
+
+            </tree>
+        </field>
+    </record>
+
+    <!--   ############# SEARCH & FILTER VIEW  : you can add search fields so u can search at once in multiple fields if u want   -->
+    <record id="view_fleet_vehicle_tours_search" model="ir.ui.view">
+        <field name="name">view.fleet.vehicle.tours.search</field>
+        <field name="model">fleet.vehicle.tours</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="vehicle_id" string="Vehicule"/>
+                <field name="selected_driver_id" string="Conducteur"/>
+                <field name="tour_date" string="Date"/>
+                <field name="tour_time" string="Time"/>
+                <field name="active" string="Archive"/>
+                <field name="priority" string="Priorite"/>
+                <field name="state" string="Status"/>
+                <!--                FIX THESSEEE sol: search in client and dest client_values ....-->
+                <field name="tours_contracts_ids" string="N° de commande"
+                       filter_domain="[('tours_contracts_ids.order_number','ilike',self)]"/>
+                <field name="client_values" string="Client"/>
+                <field name="destination_values" string="Destination"/>
+            </search>
+        </field>
+    </record>
+</odoo>
